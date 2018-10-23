@@ -1,12 +1,29 @@
-﻿using System;
-
-namespace Benchmark
+﻿namespace Benchmark
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using Benchmark.Core;
+    using Benchmark.Formatters;
+
+    /// <summary>
+    /// The main program
+    /// </summary>
+    internal sealed class Program
     {
-        static void Main(string[] args)
+        /// <summary>
+        /// Defines the entry point of the application.
+        /// </summary>
+        /// <param name="args">The arguments.</param>
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BenchmarkServiceConfiguration configuration = BenchmarkServiceConfiguration.Load();
+            BenchmarkService benchmarkService = BenchmarkService.Create(configuration);
+
+            IEnumerable<BenchmarkResult> results = benchmarkService.Run();
+            
+            IBenchmarkResultFormatter formatter = new CsvBenchmarkResultFormatter();
+
+            Console.WriteLine(formatter.Format(results));
         }
     }
 }
