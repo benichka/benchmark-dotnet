@@ -53,5 +53,15 @@
 
             return slice;
         }
+
+        /// <summary>
+        /// Gets the time stamp.
+        /// </summary>
+        /// <param name="time">The time.</param>
+        /// <returns>A timestamp</returns>
+        public static string GetTimeStamp(DateTime time)
+        {
+            return time.ToString("yyyyMMddHHmmssffff");
+        }
     }
 }

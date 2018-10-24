@@ -6,10 +6,10 @@
     internal interface IScoringStrategy
     {
         /// <summary>
-        /// Scores the specified values.
+        /// Scores the specified value.
         /// </summary>
-        /// <param name="values">The values.</param>
+        /// <param name="values">The value.</param>
         /// <returns>A score</returns>
-        long Score(long[] values);
+        long Score(long value);
     }
 }

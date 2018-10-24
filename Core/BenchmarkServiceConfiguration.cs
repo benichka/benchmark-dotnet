@@ -159,7 +159,7 @@
             /// <summary>
             /// The operations
             /// </summary>
-            public Dictionary<BenchmarkOperation, int> Operations;
+            public Dictionary<BenchmarkOperation, int> Operations { get; set; }
         }
     }
 }

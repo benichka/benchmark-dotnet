@@ -6,14 +6,14 @@
     internal enum BenchmarkContainerType
     {
         /// <summary>
-        /// The array container type
+        /// The dictionary container type
         /// </summary>
-        ArrayList,
+        Dictionary,
 
         /// <summary>
-        /// The hashtable container type
+        /// The linked list container type
         /// </summary>
-        Hashtable,
+        LinkedList,
 
         /// <summary>
         /// The queue container type
@@ -21,13 +21,8 @@
         Queue,
 
         /// <summary>
-        /// The sorted list container type
+        /// The sorted set container type
         /// </summary>
-        SortedList,
-
-        /// <summary>
-        /// The stack container type
-        /// </summary>
-        Stack
+        SortedSet
     }
 }

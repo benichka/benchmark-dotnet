@@ -13,10 +13,12 @@
         /// Creates a benchmark container.
         /// </summary>
         /// <returns>A benchmark container</returns>
-        public static IBenchmarkContainer<T> CreateBenchmarkContainer(BenchmarkContainerType type, IEnumerable<T> tuples)
+        public static IBenchmarkContainer<T> CreateBenchmarkContainer(BenchmarkContainerType type, T[] tuples)
         {
             switch (type)
             {
+                case BenchmarkContainerType.LinkedList:
+                    return LinkedListBenchmarkContainer<T>.Create(tuples);
                 case BenchmarkContainerType.Queue:
                     return QueueBenchmarkContainer<T>.Create(tuples);
                 default:

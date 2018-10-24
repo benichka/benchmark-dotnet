@@ -65,13 +65,16 @@
             int operationIndex = 0;
             foreach (KeyValuePair<BenchmarkOperation, int> kvp in this.configuration.Operations)
             {
-                long[] runtimes = new long[kvp.Value];
+                Action<int> action = this.GetAction(container, kvp.Key);
+
+                this.stopWatch.Restart();
                 for (int iterationIndex = 0; iterationIndex < kvp.Value; iterationIndex++)
                 {
-                    runtimes[iterationIndex] = this.Run(container, kvp.Key, this.testValues[operationIndex + iterationIndex]);
+                    action(this.testValues[operationIndex + iterationIndex]);
                 }
+                this.stopWatch.Stop();
 
-                result.Record(kvp.Key, this.scoringStrategy.Score(runtimes));
+                result.Record(kvp.Key, this.scoringStrategy.Score(this.stopWatch.ElapsedMilliseconds));
                 operationIndex++;
             }
 
@@ -88,33 +91,29 @@
         /// A duration
         /// </returns>
         /// <exception cref="System.ArgumentException">Operation not supported - operation</exception>
-        private long Run(IBenchmarkContainer<int> container, BenchmarkOperation operation, int tuple)
+        private Action<T> GetAction<T>(IBenchmarkContainer<T> container, BenchmarkOperation operation)
         {
-            Action method;
+            Action<T> method;
 
             switch (operation)
             {
                 case BenchmarkOperation.Delete:
-                    method = () => container.Delete(tuple);
+                    method = (t) => container.Delete(t);
                     break;
                 case BenchmarkOperation.Find:
-                    method = () => container.Find(tuple);
+                    method = (t) => container.Find(t);
                     break;
                 case BenchmarkOperation.Insert:
-                    method = () => container.Insert(tuple);
+                    method = (t) => container.Insert(t);
                     break;
                 case BenchmarkOperation.Iterate:
-                    method = () => container.Iterate();
+                    method = (t) => container.Iterate();
                     break;
                 default:
                     throw new ArgumentException("Operation not supported", nameof(operation));
             }
 
-            this.stopWatch.Restart();
-            method();
-            this.stopWatch.Stop();
-
-            return this.stopWatch.ElapsedMilliseconds;
+            return method;
         }
 
         /// <summary>

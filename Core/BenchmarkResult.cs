@@ -41,7 +41,7 @@
         /// <value>
         /// The scores.
         /// </value>
-        public Dictionary<BenchmarkOperation, double> Scores { get; };
+        public Dictionary<BenchmarkOperation, double> Scores { get; }
 
         /// <summary>
         /// Records a score for the specified operation.

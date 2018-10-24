@@ -53,7 +53,7 @@
         /// <returns>A benchmark service</returns>
         public static BenchmarkService Create(BenchmarkServiceConfiguration configuration)
         {
-            return new BenchmarkService(configuration, new SumScoringStrategy());
+            return new BenchmarkService(configuration, new SimpleScoringStrategy());
         }
 
         /// <summary>
