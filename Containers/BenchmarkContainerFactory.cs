@@ -17,6 +17,8 @@
         {
             switch (type)
             {
+                case BenchmarkContainerType.HashSet:
+                    return HashSetBenchmarkContainer<T>.Create(tuples);
                 case BenchmarkContainerType.LinkedList:
                     return LinkedListBenchmarkContainer<T>.Create(tuples);
                 case BenchmarkContainerType.Queue:
