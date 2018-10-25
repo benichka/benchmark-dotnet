@@ -68,7 +68,7 @@
                     foreach (long cardinality in orderedCardinalities)
                     {
                         double score = mappedResults[CsvBenchmarkResultFormatter.GetResultKey(containerType, cardinality, operation)];
-                        line = string.Join(',', score);
+                        line += $",{score}";
                     }
 
                     output += $"{line}\n";

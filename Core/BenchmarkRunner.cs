@@ -36,7 +36,7 @@
         {
             this.configuration = configuration;
             this.scoringStrategy = scoringStrategy;
-            this.testValues = BenchmarkRunner.GetTestValues(new Random(this.configuration.Seed), this.configuration.Operations.Sum(kvp => kvp.Value));
+            this.testValues = BenchmarkRunner.GetTestValues(new Random(this.configuration.Seed), this.configuration.Operations.Sum(kvp => kvp.Value) * this.configuration.TestIterationCountScalar);
             this.stopWatch = new Stopwatch();
         }
 
@@ -68,7 +68,7 @@
                 Action<int> action = this.GetAction(container, kvp.Key);
 
                 this.stopWatch.Restart();
-                for (int iterationIndex = 0; iterationIndex < kvp.Value; iterationIndex++)
+                for (int iterationIndex = 0; iterationIndex < (kvp.Value * this.configuration.TestIterationCountScalar); iterationIndex++)
                 {
                     action(this.testValues[operationIndex + iterationIndex]);
                 }
@@ -98,13 +98,13 @@
             switch (operation)
             {
                 case BenchmarkOperation.Delete:
-                    method = (t) => container.Delete(t);
+                    method = container.Delete;
                     break;
                 case BenchmarkOperation.Find:
                     method = (t) => container.Find(t);
                     break;
                 case BenchmarkOperation.Insert:
-                    method = (t) => container.Insert(t);
+                    method = container.Insert;
                     break;
                 case BenchmarkOperation.Iterate:
                     method = (t) => container.Iterate();

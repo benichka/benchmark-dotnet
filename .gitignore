@@ -3,4 +3,7 @@ bin/
 .vscode/
 .vs/
 
+Properties/
+
 *.userosscache
+Benchmark.csproj.user

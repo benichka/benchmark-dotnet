@@ -20,7 +20,7 @@
         /// <summary>
         /// The maximum cardinality power
         /// </summary>
-        private const int MaxCardinalityPower = 10;
+        private const int MaxCardinalityPower = 31;
 
         /// <summary>
         /// The default configuration file name
@@ -66,6 +66,17 @@
         public Dictionary<BenchmarkOperation, int> Operations;
 
         /// <summary>
+        /// Gets the test iteration count scalar.
+        /// </summary>
+        /// <value>
+        /// The test iteration count scalar.
+        /// </value>
+        public int TestIterationCountScalar
+        {
+            get { return 100; }
+        }
+
+        /// <summary>
         /// Gets the seed.
         /// </summary>
         /// <value>
@@ -91,9 +102,14 @@
         /// <returns></returns>
         private static long GetCardinalityFromPower(int power)
         {
-            return Convert.ToInt64(Math.Pow(10, power));
+            return Convert.ToInt64(Math.Pow(2, power));
         }
 
+        /// <summary>
+        /// Validates the specified benchmark settings.
+        /// </summary>
+        /// <param name="benchmarkSettings">The benchmark settings.</param>
+        /// <exception cref="ConfigurationException">Configuration not valid</exception>
         private static void Validate(BenchmarkSettingsSection benchmarkSettings)
         {
             if (benchmarkSettings.CardinalityPowers == null || benchmarkSettings.CardinalityPowers.Length == 0)

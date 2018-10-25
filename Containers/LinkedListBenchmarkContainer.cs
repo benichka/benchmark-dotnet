@@ -57,7 +57,17 @@
         /// <param name="tuple">The tuple.</param>
         public void Delete(T tuple)
         {
-            this.linkedList.Remove(tuple);
+            LinkedListNode<T> node = this.linkedList.First;
+            while (node != null)
+            {
+                var next = node.Next;
+                if (node.Value.Equals(tuple))
+                {
+                    this.linkedList.Remove(node);
+                }
+
+                node = next;
+            }
         }
 
         /// <summary>
@@ -67,7 +77,8 @@
         /// <returns></returns>
         public T Find(T tuple)
         {
-            return this.linkedList.FirstOrDefault(e => e.Equals(tuple));
+            LinkedListNode<T> node = this.linkedList.Find(tuple);
+            return node != null ? node.Value : default(T);
         }
 
         /// <summary>
@@ -76,7 +87,7 @@
         /// <param name="tuple">The tuple.</param>
         public void Insert(T tuple)
         {
-            linkedList.AddLast(tuple);
+            this.linkedList.AddLast(tuple);
         }
 
         /// <summary>
