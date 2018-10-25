@@ -23,6 +23,10 @@
                     return LinkedListBenchmarkContainer<T>.Create(tuples);
                 case BenchmarkContainerType.Queue:
                     return QueueBenchmarkContainer<T>.Create(tuples);
+                case BenchmarkContainerType.SortedDictionary:
+                    return SortedDictionaryBenchmarkContainer<T>.Create(tuples);
+                case BenchmarkContainerType.SortedList:
+                    return SortedListBenchmarkContainer<T>.Create(tuples);
                 default:
                     throw new ArgumentException("Type not supported", nameof(type));
             }

@@ -18,6 +18,16 @@
         /// <summary>
         /// The queue container type
         /// </summary>
-        Queue
+        Queue,
+
+        /// <summary>
+        /// The sorted dictionary container type
+        /// </summary>
+        SortedDictionary,
+
+        /// <summary>
+        /// The sorted list container type
+        /// </summary>
+        SortedList
     }
 }
